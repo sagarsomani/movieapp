@@ -21,53 +21,60 @@ class VPNLocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/background.png"),
-            fit: BoxFit.cover,
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/background.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Icon(Icons.arrow_back, color: Colors.white),
-                SizedBox(width: 10),
-                Text(
-                  'Choose Location',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search location',
-                hintStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.black26,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                prefixIcon: Icon(Icons.search, color: Colors.white),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Choose Location',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ],
               ),
-              style: TextStyle(color: Colors.white),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: locations.length,
-                itemBuilder: (context, index) {
-                  return LocationTile(
-                    name: locations[index]['name'],
-                    flagAsset: 'assets/flags/${locations[index]['flag']}',
-                  );
-                },
+              SizedBox(height: 20),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search location',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.black26,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  prefixIcon: Icon(Icons.search, color: Colors.white),
+                ),
+                style: TextStyle(color: Colors.white),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: locations.length,
+                  itemBuilder: (context, index) {
+                    return LocationTile(
+                      name: locations[index]['name'],
+                      flagAsset: 'assets/flags/${locations[index]['flag']}',
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

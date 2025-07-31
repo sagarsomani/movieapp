@@ -11,7 +11,21 @@ class LocationTile extends StatelessWidget {
     return ListTile(
       leading: Image.asset(flagAsset, height: 24),
       title: Text(name, style: TextStyle(color: Colors.white)),
-      trailing: Icon(Icons.network_check, color: Colors.purple),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.network_cell, color: Colors.purple),
+          SizedBox(width: 8),
+          Icon(Icons.keyboard_arrow_down, color: Colors.white),
+        ],
+      ),
+
+      onTap: () {
+        // Handle location selection
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Selected location: $name')));
+      },
     );
   }
 }
